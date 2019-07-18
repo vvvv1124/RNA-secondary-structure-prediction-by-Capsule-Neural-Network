@@ -5,14 +5,19 @@ from PIL import Image
 import input_and_process_data as ipd
 import coding_matrix as cm
 
+
 '''
-输入：m个n*n矩阵形成的list
-输出：m*n个大小为num*length的矩阵形成的list
-调用方法：result=slide_window(matrix, num)
+输入：m个平均长度为n的方阵形成的list
+
+输出：m*n个大小为row*column的矩阵形成的list
+
+调用方法：result=slide_window(matrix, row)
          调用后result为长度为m*n的list 其中每一项都是一个行数为row列数不定的矩阵(row暂时用11或19)
-         result=same_size(result, num ,length)
+         
+         result=same_size(matrix, column)
          调用后result为长度为m*n的list 其中每一项都是一个row*column的矩阵(column暂时用120或128)
 '''
+
 
 # 滑窗算法 统一行数
 def slide_window(matrix, row):
@@ -33,7 +38,6 @@ def same_size(matrix, column):
         image = image.resize((column, len(matrix[x])))  # 用处理图像的resize函数缩放，双括号血泪教训
         matrix[x] = (np.asarray(image))  # 将图像转化回矩阵 即可得到大小一致的矩阵
     return matrix
-
 
 """
 np.set_printoptions(threshold=np.inf, formatter={'float': '{:.1f}'.format})
